@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 import { Header } from "@/components/header";
+import { Providers } from "@/components/providers";
 
 export default function RootLayout({
   children,
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
        <Header></Header>
+       <Providers>
         {children}
+      </Providers>
       </body>
     </html>
   );
