@@ -1,0 +1,26 @@
+{
+  "servers": {
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "postgres": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "-e",
+          "DATABASE_URI",
+          "crystaldba/postgres-mcp",
+          "--access-mode=unrestricted"
+        ],
+        "env": {
+          "DATABASE_URI": "postgresql://admin:admin@localhost:5432/shorturl?schema=public"
+        }
+      }
+  },
+}
