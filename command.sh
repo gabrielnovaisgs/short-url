@@ -2,6 +2,7 @@ command=${1:-"dev"}
 
 case $command in
   dev)
+    docker compose -f infra/compose.dev.yml up -d && \
     pnpm -r start:dev
     ;;
   build)
