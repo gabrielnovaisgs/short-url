@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center min-h-screen bg-gray-50 px-4 py-12">
+    <main className="mt-20 flex flex-col items-center min-h-screen bg-gray-50 px-4 py-12">
       {/* Hero Section */}
       <section className="w-full max-w-2xl text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">Links longos? Transforme em resultados.</h1>

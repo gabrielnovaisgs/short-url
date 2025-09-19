@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 export function Header() {
     return (
-         <header className="w-full border-b bg-white/80 backdrop-blur sticky top-0 z-50">
+         <header className="w-full absolute border-b bg-white/80 backdrop-blur top-0 z-50">
           <nav className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
             <div className="flex items-center gap-4">
               <Link href="/">
@@ -17,8 +17,11 @@ export function Header() {
               <Link href="/precos">
                 <Button variant="ghost" className="text-base">Preços</Button>
               </Link>
-              <Link href="/dashboard">
+              <Link href="/auth/sign-in">
                 <Button variant="ghost" className="text-base">Login</Button>
+              </Link>
+                <Link href="/auth/sign-up">
+                <Button variant="ghost" className="text-base">Registre-se</Button>
               </Link>
             </div>
           </nav>
