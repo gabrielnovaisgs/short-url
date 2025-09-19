@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "A simple URL shortener built with Next.js and NestJS",
 };
 
+import { Header } from "@/components/header";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,9 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className="antialiased">
+       <Header></Header>
         {children}
       </body>
     </html>

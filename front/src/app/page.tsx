@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { ChartLineIcon, QrCodeIcon, TagIcon } from "lucide-react";
 
 export default function Home() {
   const [url, setUrl] = useState("");
@@ -60,7 +61,7 @@ export default function Home() {
             <CardHeader>
               <div className="flex justify-center mb-2">
                 {/* Ícone: gráfico de barras */}
-                <span role="img" aria-label="Gráfico de barras" className="text-3xl">📊</span>
+                <span role="img" aria-label="Gráfico de barras" className="text-3xl"><ChartLineIcon></ChartLineIcon></span>
               </div>
               <CardTitle>Métricas ao seu alcance</CardTitle>
             </CardHeader>
@@ -74,7 +75,7 @@ export default function Home() {
             <CardHeader>
               <div className="flex justify-center mb-2">
                 {/* Ícone: etiqueta de preço */}
-                <span role="img" aria-label="Etiqueta de preço" className="text-3xl">🏷️</span>
+                <span role="img" aria-label="Etiqueta de preço" className="text-3xl"><TagIcon /></span>
               </div>
               <CardTitle>Links com a sua marca</CardTitle>
             </CardHeader>
@@ -88,7 +89,7 @@ export default function Home() {
             <CardHeader>
               <div className="flex justify-center mb-2">
                 {/* Ícone: QR Code estilizado */}
-                <span role="img" aria-label="QR Code" className="text-3xl">� QR</span>
+                <span role="img" aria-label="QR Code" className="text-3xl"><QrCodeIcon></QrCodeIcon></span>
               </div>
               <CardTitle>Compartilhe com QR Codes</CardTitle>
             </CardHeader>
@@ -168,3 +169,4 @@ export default function Home() {
     </main>
   );
 }
+
