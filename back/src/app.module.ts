@@ -22,6 +22,7 @@ import { AppService } from './app.service';
 import { ShortUrlModule } from './short-url/short-url.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
+import validate from 'env/env';
 
 @Catch(HttpException)
 class HttpExceptionFilter extends BaseExceptionFilter {
@@ -43,6 +44,8 @@ class HttpExceptionFilter extends BaseExceptionFilter {
 @Module({
   imports: [
     ConfigModule.forRoot({
+      validate: validate,
+
       isGlobal: true,
     }),
     PrismaModule,
