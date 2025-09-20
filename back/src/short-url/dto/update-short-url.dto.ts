@@ -1,4 +1,5 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateShortUrlDto } from './create-short-url.dto';
+import { createShortUrlDtoSchema } from './create-short-url.dto';
+import z from 'zod';
 
-export class UpdateShortUrlDto extends PartialType(CreateShortUrlDto) {}
+export const updateShortUrlDtoSchema = createShortUrlDtoSchema.partial();
+export type UpdateShortUrlDto = z.infer<typeof updateShortUrlDtoSchema>;
