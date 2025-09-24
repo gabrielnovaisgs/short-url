@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/swagger": "^11.2.0",
     "@prisma/client": "6.16.2",
+    "bcrypt": "^6.0.0",
     "nestjs-zod": "^5.0.1",
     "prisma": "^6.16.2",
     "reflect-metadata": "^0.2.2",
