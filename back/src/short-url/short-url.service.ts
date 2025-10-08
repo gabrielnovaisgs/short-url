@@ -20,20 +20,12 @@ export class ShortUrlService {
     const result: string[] = [];
     while (true) {
       if (value < BASE) {
-        const rest = value % BASE;
-
-        const pos = parseInt(rest.toFixed(0));
-        result.push(CHARSET[pos]);
-        result.push(value);
+        result.unshift(CHARSET[value]);
         break;
       }
-
-      const valueDivided = parseInt((value / BASE).toFixed(0));
-      const pos = valueDivided;
-      result.push(CHARSET[pos]);
-      if (valueDivided < BASE) {
-      }
-      value = rest;
+      const rest = value % BASE;
+      result.unshift(CHARSET[rest]);
+      value = Math.floor(value / BASE);
     }
 
     console.log(result);
