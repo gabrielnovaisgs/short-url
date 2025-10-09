@@ -16,8 +16,7 @@ datasource db {
 
 model Url {
   id        Int      @id @default(autoincrement())
-  shortUrl  String   @unique @map("short_url")
-  longUrl   String   @map("long_url")
+  url       String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

@@ -5,10 +5,8 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ShortUrlService {
-  constructor() {}
-  create(createShortUrlDto: CreateShortUrlDto) {
-    return 'This action adds a new shortUrl';
-  }
+  constructor(private readonly prisma: PrismaService) {}
+  create(createShortUrlDto: CreateShortUrlDto) {}
 
   base62NumberConverter(value: number): string {
     const BASE = 62;
