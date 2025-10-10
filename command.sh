@@ -4,7 +4,7 @@ command=${1:-"dev"}
 db_reset() {
   cd ./back && \
     . ./.env && \
-    [ $NODE_ENV = "dev" ] && pnpm db:reset || echo "Command allowed only in dev enviroment" 
+    [ $NODE_ENV = "dev" ] && pnpm db:reset && pnpm prisma:seed || echo "Command allowed only in dev enviroment" 
 }
 
 case $command in
