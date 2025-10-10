@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateShortUrlDto } from './dto/create-short-url.dto';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ConfigService } from '@nestjs/config';
 import { BaseConverter } from './entities/base-converter.entity';
+import { EnvService } from 'src/env/env.service';
 
 @Injectable()
 export class ShortUrlService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly configService: ConfigService,
+    private readonly envService: EnvService,
   ) {}
   async save(createShortUrlDto: CreateShortUrlDto): Promise<string> {
     const url = await this.prisma.url.upsert({
@@ -35,12 +35,12 @@ export class ShortUrlService {
 
   private encodeShortUrl(id: number): string {
     const shortedId = BaseConverter.toBase62(id);
-    return `${this.configService.get('BASE_URL')}/${shortedId}`;
+    return `${this.envService.get('BASE_URL')}/${shortedId}`;
   }
 
   private decodeShortUrl(url: string): number {
     const encodedPart = url
-      .replace(`${this.configService.get('BASE_URL')}}`, '')
+      .replace(`${this.envService.get('BASE_URL')}`, '')
       .replace('/', '');
     return BaseConverter.toBase10(encodedPart);
   }
