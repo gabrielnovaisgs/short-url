@@ -2,7 +2,9 @@ import z from 'zod';
 const envSchema = z.object({
   DATABASE_URL: z.string(),
   NODE_ENV: z.enum(['dev', 'staging', 'prod']).default('dev'),
-  BASE_URL: z.string().default('http://localhost:3000'),
+  BASE_URL: z.url(),
+  PORT: z.coerce.number().default(3000),
+  FRONT_URL: z.url(),
 });
 
 export type Env = z.infer<typeof envSchema>;
