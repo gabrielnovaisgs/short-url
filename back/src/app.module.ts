@@ -20,8 +20,7 @@ import {
   MiddlewareConsumer,
   RequestMethod,
 } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
 import { ShortUrlModule } from './short-url/short-url.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
@@ -52,14 +51,11 @@ class HttpExceptionFilter extends BaseExceptionFilter {
       validate: validate,
       isGlobal: true,
     }),
+    EnvModule,
     PrismaModule,
     ShortUrlModule,
-    EnvModule,
   ],
-  controllers: [AppController],
-
   providers: [
-    AppService,
     {
       provide: APP_PIPE,
       useClass: ZodValidationPipe,

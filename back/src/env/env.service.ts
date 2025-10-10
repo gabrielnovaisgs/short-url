@@ -1,8 +1,7 @@
-import { Global, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Env } from './env';
 
-@Global()
 @Injectable()
 export class EnvService {
   constructor(private readonly configService: ConfigService<Env, true>) {}
