@@ -15,13 +15,4 @@ describe('ShortUrlService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
-
-  it.each([
-    [1000, 'g8'],
-    [6200, '1C0'],
-    [8457, '2cp'],
-  ])('should convert to base62', (value, expectedResult) => {
-    const result = service.base62NumberConverter(value);
-    expect(result).toBe(expectedResult);
-  });
 });

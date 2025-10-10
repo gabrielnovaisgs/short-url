@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ShortUrlService } from './short-url.service';
 import { CreateShortUrlDto } from './dto/create-short-url.dto';
 
@@ -16,6 +8,6 @@ export class ShortUrlController {
 
   @Post()
   create(@Body() createShortUrlDto: CreateShortUrlDto) {
-    return this.shortUrlService.create(createShortUrlDto);
+    return this.shortUrlService.save(createShortUrlDto);
   }
 }

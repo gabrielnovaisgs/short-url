@@ -16,6 +16,9 @@ import {
   ArgumentsHost,
   Logger,
   Catch,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -23,6 +26,7 @@ import { ShortUrlModule } from './short-url/short-url.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ConfigModule } from '@nestjs/config';
 import validate from 'env/env';
+import { RedirectMiddleware } from './middlewares/redirect.middleware';
 
 @Catch(HttpException)
 class HttpExceptionFilter extends BaseExceptionFilter {
@@ -69,4 +73,14 @@ class HttpExceptionFilter extends BaseExceptionFilter {
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(RedirectMiddleware)
+      .exclude({
+        path: 'api',
+        method: RequestMethod.ALL,
+      })
+      .forRoutes('*');
+  }
+}

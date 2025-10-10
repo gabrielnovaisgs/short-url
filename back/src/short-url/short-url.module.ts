@@ -5,5 +5,6 @@ import { ShortUrlController } from './short-url.controller';
 @Module({
   controllers: [ShortUrlController],
   providers: [ShortUrlService],
+  exports: [ShortUrlService],
 })
 export class ShortUrlModule {}
