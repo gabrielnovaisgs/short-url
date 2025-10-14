@@ -11,7 +11,7 @@ export class RedirectMiddleware implements NestMiddleware {
   ) {}
   async use(req: Request, res: Response, next: NextFunction) {
     if (req.path.startsWith('/api')) {
-      next();
+      return next();
     }
     const url = await this.shortUrlService.getOriginalUrl(req.path);
     if (!url) {

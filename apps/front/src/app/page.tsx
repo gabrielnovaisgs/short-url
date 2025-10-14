@@ -5,18 +5,33 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
-import { ChartLineIcon, QrCodeIcon, TagIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChartLineIcon, CopyIcon, QrCodeIcon, TagIcon } from "lucide-react";
+import { useCreateShortUrl } from "../hooks/use-create-shorturl";
+import { ShortUrlResponse } from "@/api/create-shorturl.api";
 
 export default function Home() {
-  const [url, setUrl] = useState("");
-  const [shortened, setShortened] = useState<string | null>(null);
+  const [url, setUrl] = useState("https://tanstack.com/query/v5/docs/framework/react/installation");
+  const [shorteneds, setShorteneds] = useState<ShortUrlResponse[]>([]);
   const [showDialog, setShowDialog] = useState(false);
+  const {data, status, mutate: createShortUrl, isSuccess } = useCreateShortUrl();
 
-  // Simulação de encurtamento
+  
+useEffect(()=> {
+  if (!data) return;
+    setShorteneds(prev => {
+      if (!prev.find(item => item.id === data.id)) {
+        return [...prev, data];
+      }
+      return prev;
+    });
+       setShowDialog(true);
+   
+}, [isSuccess])
+
   function handleShorten() {
     if (!url) return;
-    setShortened("https://short.url/demo123");
+    createShortUrl(url);
     setShowDialog(true);
   }
 
@@ -39,6 +54,24 @@ export default function Home() {
         </div>
         <span className="text-xs text-gray-400">Experimente sem cadastro!</span>
       </section>
+      {/* Links Encurtados */}
+      {shorteneds.length > 0 && (
+      <section className="w-full max-w-2xl text-center mb-12">
+        <h2 className="text-2xl font-semibold mb-4">Link Encurtado com Sucesso!</h2>
+        
+          {shorteneds.map((s) => (
+              <Card key={s.id}  >
+                <CardContent className="flex items-center justify-between gap-2">
+                <a href={s.shortedUrl} className="font-bold">{s.shortedUrl}</a>
+
+                <Button onClick={() => {navigator.clipboard.writeText(s.shortedUrl);}}><CopyIcon /></Button>
+                </CardContent>
+              </Card>
+          ))}
+       
+        <Button onClick={() => setShowDialog(false)}>Fechar</Button>
+      </section>
+      )}
 
       {/* Social Proof */}
       <section className="w-full max-w-2xl text-center mb-12">
@@ -160,10 +193,7 @@ export default function Home() {
           <DialogHeader>
             <DialogTitle>Seu link encurtado está pronto!</DialogTitle>
           </DialogHeader>
-          <div className="flex flex-col items-center gap-2">
-            <Input value={shortened ?? ""} readOnly className="mb-2" />
-            <Button onClick={() => {navigator.clipboard.writeText(shortened ?? "");}}>Copiar link</Button>
-          </div>
+          
         </DialogContent>
       </Dialog>
     </main>

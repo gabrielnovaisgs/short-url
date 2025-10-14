@@ -11,15 +11,20 @@ export class ShortUrlService {
     private readonly prisma: PrismaService,
     private readonly envService: EnvService,
   ) {}
-  async save(createShortUrlDto: CreateShortUrlDto): Promise<string> {
-    const url = await this.prisma.url.upsert({
+  async save(
+    createShortUrlDto: CreateShortUrlDto,
+  ): Promise<{ shortedUrl: string; id: number }> {
+    let url = await this.prisma.url.findUnique({
       where: { url: createShortUrlDto.url },
-      update: {},
-      create: { url: createShortUrlDto.url },
       select: { id: true },
     });
+    if (!url) {
+      url = await this.prisma.url.create({
+        data: { url: createShortUrlDto.url },
+      });
+    }
 
-    return this.encodeShortUrl(url.id);
+    return { shortedUrl: this.encodeShortUrl(url.id), id: url.id };
   }
 
   async getOriginalUrl(path: string): Promise<string | undefined> {
