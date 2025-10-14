@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateShortUrlDto } from './dto/create-short-url.dto';
+import { CreateShortUrlRequestDto } from './dto/create-short-url.dto';
 
 import { PrismaService } from 'src/prisma/prisma.service';
 import { BaseConverter } from './entities/base-converter.entity';
@@ -12,7 +12,7 @@ export class ShortUrlService {
     private readonly envService: EnvService,
   ) {}
   async save(
-    createShortUrlDto: CreateShortUrlDto,
+    createShortUrlDto: CreateShortUrlRequestDto,
   ): Promise<{ shortedUrl: string; id: number }> {
     let url = await this.prisma.url.findUnique({
       where: { url: createShortUrlDto.url },

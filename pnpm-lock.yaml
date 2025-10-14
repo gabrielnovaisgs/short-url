@@ -42,6 +42,9 @@ importers:
       '@prisma/client':
         specifier: 6.16.2
         version: 6.16.2(prisma@6.16.2(typescript@5.9.2))(typescript@5.9.2)
+      '@shorturl/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -140,10 +143,6 @@ importers:
         specifier: ^8.20.0
         version: 8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.9.2)
 
-  apps/back/dist/prisma/generated: {}
-
-  apps/back/prisma/generated: {}
-
   apps/front:
     dependencies:
       '@hookform/resolvers':
@@ -161,6 +160,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.1.13)(react@19.1.0)
+      '@shorturl/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@tanstack/react-query':
         specifier: ^5.89.0
         version: 5.89.0(react@19.1.0)

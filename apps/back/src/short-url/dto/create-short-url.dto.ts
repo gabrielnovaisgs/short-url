@@ -1,8 +1,7 @@
 import { createZodDto } from 'nestjs-zod';
+import { createShortUrlDtoSchema, createShortUrlResponseDtoSchema } from '@shorturl/shared';
 import z from 'zod';
 
-export const createShortUrlDtoSchema = z.object({
-  url: z.url(),
-});
+export class CreateShortUrlRequestDto extends createZodDto(createShortUrlDtoSchema) {}
 
-export class CreateShortUrlDto extends createZodDto(createShortUrlDtoSchema) {}
+export class CreateShortUrlResponseDto extends createZodDto(createShortUrlResponseDtoSchema) {}
