@@ -7,12 +7,19 @@ settings:
 importers:
 
   .:
+    dependencies:
+      zod:
+        specifier: ^4.1.9
+        version: 4.1.9
     devDependencies:
       turbo:
         specifier: ^2.5.8
         version: 2.5.8
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
-  back:
+  apps/back:
     dependencies:
       '@nestjs/common':
         specifier: ^11.0.1
@@ -133,7 +140,11 @@ importers:
         specifier: ^8.20.0
         version: 8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.9.2)
 
-  front:
+  apps/back/dist/prisma/generated: {}
+
+  apps/back/prisma/generated: {}
+
+  apps/front:
     dependencies:
       '@hookform/resolvers':
         specifier: ^5.2.2
@@ -208,6 +219,8 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.2
+
+  packages/shared: {}
 
 packages:
 
@@ -4688,6 +4701,11 @@ packages:
 
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -9731,6 +9749,8 @@ snapshots:
   typescript@5.8.3: {}
 
   typescript@5.9.2: {}
+
+  typescript@5.9.3: {}
 
   uglify-js@3.19.3:
     optional: true
