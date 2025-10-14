@@ -4,13 +4,13 @@ command=${1:-"dev"}
 db_reset() {
   cd ./back && \
     . ./.env && \
-    [ $NODE_ENV = "dev" ] && pnpm db:reset && pnpm prisma:seed || echo "Command allowed only in dev enviroment" 
+    [ $NODE_ENV = "dev" ] && pnpm db:reset && npx prisma generate && pnpm prisma:seed || echo "Command allowed only in dev enviroment" 
 }
 
 case $command in
   dev)
     docker compose -f infra/compose.dev.yml up -d && \
-    pnpm -r start:dev
+    pnpm run dev
     ;;
   build)
     pnpm build --filter front --filter back

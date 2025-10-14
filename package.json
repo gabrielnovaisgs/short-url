@@ -4,5 +4,16 @@
   "description": "",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "packageManager": "pnpm@10.18.2",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "start": "turbo start",
+    "lint": "turbo lint",
+    "test": "turbo test"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.8"
+  }
 }
