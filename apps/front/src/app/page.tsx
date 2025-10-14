@@ -3,17 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 import { ChartLineIcon, CopyIcon, QrCodeIcon, TagIcon } from "lucide-react";
 import { useCreateShortUrl } from "../hooks/use-create-shorturl";
-import { ShortUrlResponse } from "@/api/create-shorturl.api";
+import { CreateShortUrlResponseDto } from "@shorturl/shared";
+import { toast } from "sonner";
+
 
 export default function Home() {
-  const [url, setUrl] = useState("https://tanstack.com/query/v5/docs/framework/react/installation");
-  const [shorteneds, setShorteneds] = useState<ShortUrlResponse[]>([]);
-  const [showDialog, setShowDialog] = useState(false);
+  const [url, setUrl] = useState("");
+  const [shorteneds, setShorteneds] = useState<CreateShortUrlResponseDto[]>([]);
   const {data, status, mutate: createShortUrl, isSuccess } = useCreateShortUrl();
 
   
@@ -25,16 +25,23 @@ useEffect(()=> {
       }
       return prev;
     });
-       setShowDialog(true);
+      
+    toast.success("URL encurtada com sucesso!")
    
 }, [isSuccess])
 
   function handleShorten() {
     if (!url) return;
-    createShortUrl(url);
-    setShowDialog(true);
+    createShortUrl(url)
+    toast.message("Encurtando sua URL...")
   }
 
+  function handleCopyLink(url:string) {
+    navigator.clipboard.writeText(url);
+    toast.message("Link copiado com sucesso!", {
+      description: url,
+    });
+  }
   return (
     <main className="mt-20 flex flex-col items-center min-h-screen bg-gray-50 px-4 py-12">
       {/* Hero Section */}
@@ -58,18 +65,18 @@ useEffect(()=> {
       {shorteneds.length > 0 && (
       <section className="w-full max-w-2xl text-center mb-12">
         <h2 className="text-2xl font-semibold mb-4">Link Encurtado com Sucesso!</h2>
-        
+        <aside className="flex flex-col gap-4">
           {shorteneds.map((s) => (
               <Card key={s.id}  >
-                <CardContent className="flex items-center justify-between gap-2">
-                <a href={s.shortedUrl} className="font-bold">{s.shortedUrl}</a>
+                <div className="flex items-center justify-between gap-2 px-4 w-full">
+                <a href={s.shortedUrl} target="_blank" rel="noopener noreferrer" className="font-bold">{s.shortedUrl}</a>
 
-                <Button onClick={() => {navigator.clipboard.writeText(s.shortedUrl);}}><CopyIcon /></Button>
-                </CardContent>
+                <Button onClick={() => handleCopyLink(s.shortedUrl)}><CopyIcon /></Button>
+                </div>
               </Card>
           ))}
        
-        <Button onClick={() => setShowDialog(false)}>Fechar</Button>
+        </aside>
       </section>
       )}
 
@@ -187,15 +194,6 @@ useEffect(()=> {
         <Button size="lg" className="text-lg px-8 py-4">Quero começar gratuitamente</Button>
       </section>
 
-      {/* Dialog de resultado do encurtador */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Seu link encurtado está pronto!</DialogTitle>
-          </DialogHeader>
-          
-        </DialogContent>
-      </Dialog>
     </main>
   );
 }

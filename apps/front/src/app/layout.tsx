@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "URL Shortener",
   description: "A simple URL shortener built with Next.js and NestJS",
 };
-
+import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
 
@@ -23,6 +23,7 @@ export default function RootLayout({
        <Header></Header>
        <Providers>
         {children}
+        <Toaster  richColors closeButton/>
       </Providers>
       </body>
     </html>

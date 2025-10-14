@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import api from "./api";
 import {  CreateShortUrlResponseDto} from "@shorturl/shared";
 
